@@ -24,9 +24,9 @@ createCard = (data) => {
         card.append(cardBody);
 
         //create header text (school title)
-        const h1 = document.createElement('h1');
-        h1.innerText = element.school_name + ` (${element.dbn})`;
-        cardHeader.append(h1);
+        const schoolName = document.createElement('h1');
+        schoolName.innerText = element.school_name + ` (${element.dbn})`;
+        cardHeader.append(schoolName );
 
         //create hide/show button in header
 
@@ -75,13 +75,48 @@ createCard = (data) => {
         phoneLink.append(phoneNumber)
         cardBody.append(phoneLink);
 
+        //add school email
+        const email = document.createElement('p');
+        const emailLink = document.createElement('a');
+        emailLink.href = `mailto:${element.school_email}`;
+        email.innerText = element.school_email;
+        emailLink.append(email);
+        cardBody.append(emailLink);
+
         //add subway info
         const subway = document.createElement('p');
         if(element.subway){subway.innerHTML = `<h3>Subway</h3> ${element.subway}`}
         else {subway.innerHTML = ' '};
         cardBody.append(subway);
 
-        
+        //add bus info
+        const bus = document.createElement('p');
+        if(element.bus){bus.innerHTML = `<h3>Bus</h3> ${element.bus}`}
+        else {bus.innerHTML = ' '};
+        cardBody.append(bus);
+
+        //add gradespan
+        const gradespan = document.createElement('p');
+        gradespan.innerText = `Grades ${element.gradespan}`;
+        cardBody.append(gradespan);
+
+        //add student population
+        const studentPopulation = document.createElement('p');
+        studentPopulation.innerText = `${element.total_students} students`;
+        cardBody.append(studentPopulation);
+
+        //add schedule
+        const schedule = document.createElement('p');
+        schedule.innerText = `${element.start_time} - ${element.end_time}`;
+        cardBody.append(schedule);
+
+        //add overview
+        const overviewHeader = document.createElement('h1');
+        const overviewText = document.createElement('p');
+        overviewHeader.innerText = 'Overview';
+        cardBody.append(overviewHeader);
+        overviewText.innerText = element.overview_paragraph;
+        cardBody.append(overviewText);
 
     });
 
