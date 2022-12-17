@@ -123,8 +123,9 @@ createCard = (data) => {
 
 }
 
+//set interval for live filter
 let typingTimer;        
-let typeInterval = 500; // Half a second
+let typeInterval = 300;
 let searchInput = document.getElementById('search');
 
 searchInput.addEventListener('keyup', () => {
@@ -132,6 +133,7 @@ searchInput.addEventListener('keyup', () => {
   typingTimer = setTimeout(liveSearch, typeInterval);
 });
 
+//live search function
 liveSearch = () => {
     let cards = document.querySelectorAll('details');
     let search_query = document.getElementById("search").value;
