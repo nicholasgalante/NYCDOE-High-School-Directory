@@ -17,6 +17,10 @@ html {
     font-size: 16px;
 }
 
+form {
+    margin: 10px;
+}
+
 summary {
     list-style: none;
     display: flex;
@@ -32,6 +36,11 @@ details > summary::after {
     content: url(./Images/arrow.svg);
     width: 3rem;
     display: inline-flex;
+    transition: transform 0.1s ease;
+}
+
+details[open] > summary::after {
+    transform: rotate(90deg);
 }
 
 details {
