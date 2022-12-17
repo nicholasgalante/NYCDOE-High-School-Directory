@@ -25,8 +25,9 @@ createCard = (data) => {
 
         //create header text (school title)
         const schoolName = document.createElement('h1');
+        schoolName.setAttribute('class', 'school-name');
         schoolName.innerText = element.school_name + ` (${element.dbn})`;
-        cardHeader.append(schoolName );
+        cardHeader.append(schoolName);
 
         //create hide/show button in header
 
@@ -70,7 +71,7 @@ createCard = (data) => {
         //add phone number
         const phoneNumber = document.createElement('p');
         const phoneLink = document.createElement('a');
-        phoneLink.href=`tel:${phoneNumber}`;
+        phoneLink.href = `tel:${phoneNumber}`;
         phoneNumber.innerText = element.phone_number;
         phoneLink.append(phoneNumber)
         cardBody.append(phoneLink);
@@ -85,14 +86,14 @@ createCard = (data) => {
 
         //add subway info
         const subway = document.createElement('p');
-        if(element.subway){subway.innerHTML = `<h3>Subway</h3> ${element.subway}`}
-        else {subway.innerHTML = ' '};
+        if (element.subway) { subway.innerHTML = `<h3>Subway</h3> ${element.subway}` }
+        else { subway.innerHTML = ' ' };
         cardBody.append(subway);
 
         //add bus info
         const bus = document.createElement('p');
-        if(element.bus){bus.innerHTML = `<h3>Bus</h3> ${element.bus}`}
-        else {bus.innerHTML = ' '};
+        if (element.bus) { bus.innerHTML = `<h3>Bus</h3> ${element.bus}` }
+        else { bus.innerHTML = ' ' };
         cardBody.append(bus);
 
         //add gradespan
@@ -113,6 +114,7 @@ createCard = (data) => {
         //add overview
         const overviewHeader = document.createElement('h1');
         const overviewText = document.createElement('p');
+        overviewHeader.setAttribute('class','overview');
         overviewHeader.innerText = 'Overview';
         cardBody.append(overviewHeader);
         overviewText.innerText = element.overview_paragraph;
