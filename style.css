@@ -52,6 +52,12 @@ details {
     background-color: #ffff;
 }
 
+#school-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .school-name {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 22px;
@@ -66,3 +72,12 @@ details {
 }
 
 
+#footer {
+    background-color: #2772db;
+    color: white;
+    padding: 15px;
+}
+
+.is-hidden { 
+    display: none; 
+}
