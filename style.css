@@ -13,18 +13,40 @@ body{
     background-color: #2772db;
 }
 
-.card {
+html {
+    font-size: 16px;
+}
+
+summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+details > summary::-webkit-details-marker{
+    display: none; 
+}
+
+details > summary::after {
+    content: url(./Images/arrow.svg);
+    width: 3rem;
+    display: inline-flex;
+}
+
+details {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 15px;
     margin: 15px;
-    width: 750px;
+    width: 900px;
     border-radius: 4px;
     background-color: #ffff;
 }
 
 .school-name {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 24px;
+    font-size: 22px;
+    margin: 0px;
 }
 
 .overview {
@@ -33,3 +55,5 @@ body{
     font-weight: 400;
     color: #2772db;
 }
+
+

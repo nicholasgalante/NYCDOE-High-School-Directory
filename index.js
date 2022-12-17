@@ -10,12 +10,11 @@ createCard = (data) => {
     const schoolList = document.querySelector('#school-list');
     data.forEach(element => {
         //create card and append to #school-list
-        const card = document.createElement('div');
-        card.setAttribute('class', 'card')
+        const card = document.createElement('details');
         schoolList.append(card)
 
         //create and append card header div
-        const cardHeader = document.createElement('div');
+        const cardHeader = document.createElement('summary');
         card.append(cardHeader);
 
         //create and append card body div
