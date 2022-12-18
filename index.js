@@ -1,14 +1,17 @@
-
-//fetch data from API
-fetch('https://data.cityofnewyork.us/resource/8b6c-7uty.json')
+fetch('https://data.cityofnewyork.us/resource/8b6c-7uty.json',{
+    headers: {
+        'Host':'data.cityofnewyork.us',
+        'Accept':'application/json',
+        'X-App-Token' : 'b2elGMrYG0TWk0R13VZLqSJlE'
+    }
+})
     .then(response => response.json())
     .then(data => createCard(data))
-    .catch(err => console.error(err));
+    .catch(err => console.log(err));
 
 let numTotalResults = 0;
 let numDisplayedResults = 0;
 const numDisplayed = document.querySelector('#num-displayed');
-
 
 //create school cards
 createCard = (data) => {
@@ -33,50 +36,51 @@ createCard = (data) => {
         schoolName.innerText = element.school_name + ` (${element.dbn})`;
         cardHeader.append(schoolName);
 
-     
-        //add borough
-        // const borough = document.createElement('p');
-        // borough.innerText = element.city;
-        // cardBody.append(borough);
+
+        // add borough
+        const borough = document.createElement('p');
+        borough.setAttribute('id', 'boroughID');
+        borough.innerText = element.borough;
+        cardBody.append(borough);
 
 
-        //add address to body and link to google Maps
+        // //add address to body and link to google Maps
         const addressText = document.createElement('p');
         const addressLink = document.createElement('a');
         const searchQuery = element.school_name.replaceAll(" ", "+");
-        addressText.setAttribute('id','boroughID');
+        // addressText.setAttribute('id', 'boroughID');
         addressText.innerText = `${element.primary_address_line_1},  ${element.city},  ${element.state_code}, ${element.postcode}`;
         addressLink.href = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
         addressLink.setAttribute('target', '_blank');
         addressLink.append(addressText)
         cardBody.append(addressLink);
 
-        //add school site to body
+        // //add school site to body
         const siteText = document.createElement('p');
         const siteLink = document.createElement('a');
 
         //clean up url link
-        let site = element.website;
-        if (!site.includes('http')) {
-            site = 'https://' + site;
-        }
+        // let site = element.website;
+        // if (!site.includes('http')) {
+        //     site = 'https://' + site;
+        // }
 
-        //clean up displayed link
-        let site2 = element.website;
-        if (site2.includes('https://')) { site2 = site2.slice(8); }
-        if (site2.includes('http://')) { site2 = site2.slice(7); }
-        // if(site2.includes('www.')){site2 = site2.slice(4);}   //exclude www.
-        if (!site2.includes('www.')) { site2 = 'www.' + site2 }; //include www.
-        if (site2.charAt(site2.length - 1) === '/') { site2 = site2.substring(0, site2.length - 1); }
+        // //clean up displayed link
+        // let site2 = element.website;
+        // if (site2.includes('https://')) { site2 = site2.slice(8); }
+        // if (site2.includes('http://')) { site2 = site2.slice(7); }
+        // // if(site2.includes('www.')){site2 = site2.slice(4);}   //exclude www.
+        // if (!site2.includes('www.')) { site2 = 'www.' + site2 }; //include www.
+        // if (site2.charAt(site2.length - 1) === '/') { site2 = site2.substring(0, site2.length - 1); }
 
-        //set display link for school site
-        siteText.innerText = site2;
-        siteLink.append(siteText);
+        // //set display link for school site
+        // siteText.innerText = site2;
+        // siteLink.append(siteText);
 
-        //set url path for school site
-        siteLink.href = site;
-        siteLink.setAttribute('target', '_blank');
-        cardBody.append(siteLink);
+        // //set url path for school site
+        // // siteLink.href = site;
+        // siteLink.setAttribute('target', '_blank');
+        // cardBody.append(siteLink);
 
         //add phone number
         const phoneNumber = document.createElement('p');
@@ -141,7 +145,6 @@ createCard = (data) => {
     });
 }
 
-
 //set interval for live filter
 let typingTimer;
 let typeInterval = 300;
@@ -156,79 +159,58 @@ searchInput.addEventListener('keyup', () => {
 liveSearch = () => {
     let cards = document.querySelectorAll('details');
     let search_query = document.getElementById("search").value;
-    numDisplayedResults = 0;
     for (var i = 0; i < cards.length; i++) {
         if (cards[i].innerText.toLowerCase()
             .includes(search_query.toLowerCase())) {
             cards[i].classList.remove("is-hidden");
-            numDisplayedResults++
+
         } else {
             cards[i].classList.add("is-hidden");
         }
     }
+    updateResultCounter();
+}
+
+//results and displayed counter
+updateResultCounter = () => {
+    let cards = document.querySelectorAll('details');
+    numDisplayedResults = 0;
+    cards.forEach(el =>{
+        if(!el.classList.contains('is-hidden')){
+            numDisplayedResults += 1;
+        }
+    })
     numDisplayed.innerText = numDisplayedResults;
 }
 
 //filter by borough
 const borough = document.querySelector('#borough-input');
-borough.addEventListener('change',()=>{
+borough.addEventListener('change', () => {
     let boroughIDs = document.querySelectorAll('#boroughID')
     boroughIDs.forEach(element => {
-        let text = element.innerHTML;
-        if (!text.includes(borough.value)){
-            element.parentElement.parentElement.parentElement.classList.add('is-hidden')
+        if(element.innerHTML === borough.value || borough.value === 'BOROUGH'){
+            element.parentElement.parentElement.classList.remove('is-hidden');
+        } else {
+            element.parentElement.parentElement.classList.add('is-hidden');
         }
     });
-    
+    updateResultCounter();
 })
 
 
 //reset button listener
 const reset = document.querySelector('#reset');
-reset.addEventListener('click',()=>{
+reset.addEventListener('click', () => {
     let cards = document.querySelectorAll('details');
     let numDisplayedResults = 0;
     for (var i = 0; i < cards.length; i++) {
-            cards[i].classList.remove("is-hidden");
-            numDisplayedResults++
+        cards[i].classList.remove("is-hidden");
     }
-    numDisplayed.innerText = numDisplayedResults;
+    updateResultCounter();
     let form = document.querySelector('form');
     form.reset();
     document.querySelector('#borough-input').selectedIndex = 0;
 })
-
-
-
-// const previousButton = document.getElementById('previous');
-// const nextButton = document.getElementById('next');
-// const currentPage = document.getElementById('current-page');
-// const totalPages = document.getElementById('total-pages');
-
-// let currentPageNumber = 1;
-// previousButton.disabled = currentPageNumber === 1;
-// currentPage.textContent = currentPageNumber;
-
-// nextButton.addEventListener('click', () => {
-//     currentPageNumber++;
-//     pageInterval += 10;
-// })
-
-// previousButton.addEventListener('click', () => {
-//     currentPageNumber--;
-// })
-
-// //  cards[i].classList.add("is-hidden");
-
-// let pageInterval = 10;
-
-// loadPages = () => {
-//     let cards = document.querySelectorAll('details');
-
-//     // for (var i = pageInterval-10; i < pageInterval; i++) {
-//     //     cards[i].classList.add("is-hidden");
-//     // }
-// }
 
 
 
