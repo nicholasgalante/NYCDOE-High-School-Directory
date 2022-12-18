@@ -9,6 +9,7 @@ let numTotalResults = 0;
 let numDisplayedResults = 0;
 const numDisplayed = document.querySelector('#num-displayed');
 
+
 //create school cards
 createCard = (data) => {
     const schoolList = document.querySelector('#school-list');
@@ -134,6 +135,7 @@ createCard = (data) => {
     });
 }
 
+
 //set interval for live filter
 let typingTimer;
 let typeInterval = 300;
@@ -161,14 +163,21 @@ liveSearch = () => {
     numDisplayed.innerText = numDisplayedResults;
 }
 
-updateNumResults = () => {
-    let totalResults = 0;
-    let cards = document.querySelectorAll('details');
-    console.log(cards)
-    const numResults = document.querySelector('#num-results');
-    numResults.innerText = totalResults;
-}
 
+//reset button listener
+const reset = document.querySelector('#reset');
+reset.addEventListener('click',()=>{
+    let cards = document.querySelectorAll('details');
+    let numDisplayedResults = 0;
+    for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("is-hidden");
+            numDisplayedResults++
+    }
+    numDisplayed.innerText = numDisplayedResults;
+    let form = document.querySelector('form');
+    form.reset();
+    document.querySelector('#borough-input').selectedIndex = 0;
+})
 
 
 
