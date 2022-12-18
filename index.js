@@ -159,29 +159,13 @@ liveSearch = () => {
     let cards = document.querySelectorAll('details');
     let search_query = document.getElementById("search").value;
     for (var i = 0; i < cards.length; i++) {
-        if(!cards[i].classList.contains('is-hidden')){
-            if (cards[i].innerText.toLowerCase()
-                .includes(search_query.toLowerCase())) {
-                cards[i].classList.remove("is-hidden");
-
+            if (cards[i].innerText.toLowerCase().includes(search_query.toLowerCase())) {
+                cards[i].classList.remove("hidden-by-search");
             } else {
-                cards[i].classList.add("is-hidden");
+                cards[i].classList.add("hidden-by-search");
             }
-        }
     }
     updateResultCounter();
-}
-
-//results and displayed counter
-updateResultCounter = () => {
-    let cards = document.querySelectorAll('details');
-    numDisplayedResults = 0;
-    cards.forEach(el => {
-        if(!el.classList.contains('hidden-by-borough') && !el.classList.contains('is-hidden-by-search') ){
-            numDisplayedResults += 1;
-        }
-    })
-    numDisplayed.innerText = numDisplayedResults;
 }
 
 //filter by borough
@@ -189,29 +173,36 @@ const borough = document.querySelector('#borough-input');
 borough.addEventListener('change', () => {
     let boroughIDs = document.querySelectorAll('#boroughID')
     boroughIDs.forEach(element => {
-
-        // if(!element.parentElement.parentElement.classList.contains('is-hidden')){
-
-        //     if (element.innerHTML != borough.value){
-        //         element.parentElement.parentElement.classList.add('is-hidden');
-        //     } 
-            if (element.innerHTML === borough.value || borough.value === 'BOROUGH') {
-                element.parentElement.parentElement.classList.remove('hidden-by-borough');
-            } else {
-                element.parentElement.parentElement.classList.add('hidden-by-borough');
-            }
-        // }
+        if (element.innerHTML === borough.value || borough.value === 'BOROUGH') {
+            element.parentElement.parentElement.classList.remove('hidden-by-borough');
+        } else {
+            element.parentElement.parentElement.classList.add('hidden-by-borough');
+        }
     });
     updateResultCounter();
 })
 
+//expand button listener
+const expand = document.querySelector('#expand');
+expand.addEventListener('click', () => {
+    let cards = document.querySelectorAll('details');
+    if(expand.innerHTML === 'Expand All'){
+        expand.innerHTML = 'Collapse All';
+    } else if (expand.innerHTML === 'Collapse All'){
+        expand.innerHTML = 'Expand All';
+    }
+    cards.forEach(el => {
+        el.hasAttribute('open') ? el.removeAttribute('open') : el.setAttribute('open', true);
+    })
+});
 
 //reset button listener
 const reset = document.querySelector('#reset');
 reset.addEventListener('click', () => {
     let cards = document.querySelectorAll('details');
     for (var i = 0; i < cards.length; i++) {
-        cards[i].classList.remove("is-hidden");
+        cards[i].classList.remove("hidden-by-search");
+        cards[i].classList.remove("hidden-by-search");
     }
     updateResultCounter();
     let form = document.querySelector('form');
@@ -219,15 +210,17 @@ reset.addEventListener('click', () => {
     document.querySelector('#borough-input').selectedIndex = 0;
 })
 
-//expand button listener
-const expand = document.querySelector('#expand');
-expand.addEventListener('click', () => {
+//results and displayed counter
+updateResultCounter = () => {
     let cards = document.querySelectorAll('details');
+    numDisplayedResults = 0;
     cards.forEach(el => {
-        el.hasAttribute('open') ? el.removeAttribute('open') : el.setAttribute('open', true);
+        if (!el.classList.contains('hidden-by-borough') && !el.classList.contains('hidden-by-search')) {
+            numDisplayedResults += 1;
+        }
     })
-});
-
+    numDisplayed.innerText = numDisplayedResults;
+}
 
 
 

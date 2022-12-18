@@ -82,11 +82,7 @@ details {
     padding: 15px;
 }
 
-.is-hidden { 
-    display: none; 
-}
-
-.is-hidden-by-search { 
+.hidden-by-search { 
     display: none; 
 }
 
