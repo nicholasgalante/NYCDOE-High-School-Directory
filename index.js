@@ -1,8 +1,8 @@
-fetch('https://data.cityofnewyork.us/resource/8b6c-7uty.json',{
+fetch('https://data.cityofnewyork.us/resource/8b6c-7uty.json', {
     headers: {
-        'Host':'data.cityofnewyork.us',
-        'Accept':'application/json',
-        'X-App-Token' : 'b2elGMrYG0TWk0R13VZLqSJlE'
+        'Host': 'data.cityofnewyork.us',
+        'Accept': 'application/json',
+        'X-App-Token': 'b2elGMrYG0TWk0R13VZLqSJlE'
     }
 })
     .then(response => response.json())
@@ -175,8 +175,8 @@ liveSearch = () => {
 updateResultCounter = () => {
     let cards = document.querySelectorAll('details');
     numDisplayedResults = 0;
-    cards.forEach(el =>{
-        if(!el.classList.contains('is-hidden')){
+    cards.forEach(el => {
+        if (!el.classList.contains('is-hidden')) {
             numDisplayedResults += 1;
         }
     })
@@ -188,7 +188,7 @@ const borough = document.querySelector('#borough-input');
 borough.addEventListener('change', () => {
     let boroughIDs = document.querySelectorAll('#boroughID')
     boroughIDs.forEach(element => {
-        if(element.innerHTML === borough.value || borough.value === 'BOROUGH'){
+        if (element.innerHTML === borough.value || borough.value === 'BOROUGH') {
             element.parentElement.parentElement.classList.remove('is-hidden');
         } else {
             element.parentElement.parentElement.classList.add('is-hidden');
@@ -202,7 +202,6 @@ borough.addEventListener('change', () => {
 const reset = document.querySelector('#reset');
 reset.addEventListener('click', () => {
     let cards = document.querySelectorAll('details');
-    let numDisplayedResults = 0;
     for (var i = 0; i < cards.length; i++) {
         cards[i].classList.remove("is-hidden");
     }
@@ -211,6 +210,16 @@ reset.addEventListener('click', () => {
     form.reset();
     document.querySelector('#borough-input').selectedIndex = 0;
 })
+
+//expand button listener
+const expand = document.querySelector('#expand');
+expand.addEventListener('click', () => {
+    let cards = document.querySelectorAll('details');
+    cards.forEach(el => {
+        el.hasAttribute('open') ? el.removeAttribute('open') : el.setAttribute('open', true);
+    })
+});
+
 
 
 
