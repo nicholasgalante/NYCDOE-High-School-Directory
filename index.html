@@ -13,22 +13,33 @@
         High School Directory<img src="Images/NYCDOE-logo.png" id="logo" alt="NYC DOE Logo">
     </div>
 
+
     <div id="search-bar">   
         <form>
             <input type="text" name="search" id="search" placeholder="Filter by school name, interests, etc.">
             <!-- <input type="submit" name="submit" value="Search"> -->
         </form>
+    
+        <select name="borough-input">
+            <option value="Borough">Borough</option>
+            <option value="bronx">Bronx</option>
+            <option value="manhattan">Manhattan</option>
+            <option value="queens">Queens</option>
+            <option value="staten-island">Staten Island</option>
+        </select>
+    
     </div>
+
 
     <div id="total-results">
         Displaying <span id="num-displayed">0</span> of <span id="num-results">0</span> results
     </div>
 
-    <div id="pagination">
+    <!-- <div id="pagination">
         <button id="previous">Previous</button>
         Page <span id="current-page">0</span> of <span id="total-pages">0</span>
         <button id="next">Next</button>
-    </div>
+    </div> -->
 
     <div id="school-list">
     </div>

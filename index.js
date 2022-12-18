@@ -5,7 +5,11 @@ fetch('https://data.cityofnewyork.us/resource/8b6c-7uty.json')
     .then(data => createCard(data))
     .catch(err => console.error(err));
 
+let numTotalResults = 0;
+let numDisplayedResults = 0;
+const numDisplayed = document.querySelector('#num-displayed');
 
+//create school cards
 createCard = (data) => {
     const schoolList = document.querySelector('#school-list');
     data.forEach(element => {
@@ -113,36 +117,93 @@ createCard = (data) => {
         //add overview
         const overviewHeader = document.createElement('h1');
         const overviewText = document.createElement('p');
-        overviewHeader.setAttribute('class','overview');
+        overviewHeader.setAttribute('class', 'overview');
         overviewHeader.innerText = 'Overview';
         cardBody.append(overviewHeader);
         overviewText.innerText = element.overview_paragraph;
         cardBody.append(overviewText);
 
-    });
+        //set total results
+        numTotalResults++;
+        const numResults = document.querySelector('#num-results');
+        numResults.innerText = numTotalResults;
 
+        //set displayed results
+        numDisplayedResults++;
+        numDisplayed.innerText = numDisplayedResults;
+    });
 }
 
 //set interval for live filter
-let typingTimer;        
+let typingTimer;
 let typeInterval = 300;
 let searchInput = document.getElementById('search');
 
 searchInput.addEventListener('keyup', () => {
-  clearTimeout(typingTimer);
-  typingTimer = setTimeout(liveSearch, typeInterval);
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(liveSearch, typeInterval);
 });
 
 //live search function
 liveSearch = () => {
     let cards = document.querySelectorAll('details');
     let search_query = document.getElementById("search").value;
+    numDisplayedResults = 0;
     for (var i = 0; i < cards.length; i++) {
-        if(cards[i].innerText.toLowerCase()
-          .includes(search_query.toLowerCase())) {
+        if (cards[i].innerText.toLowerCase()
+            .includes(search_query.toLowerCase())) {
             cards[i].classList.remove("is-hidden");
+            numDisplayedResults++
         } else {
-          cards[i].classList.add("is-hidden");
+            cards[i].classList.add("is-hidden");
         }
     }
+    numDisplayed.innerText = numDisplayedResults;
 }
+
+updateNumResults = () => {
+    let totalResults = 0;
+    let cards = document.querySelectorAll('details');
+    console.log(cards)
+    const numResults = document.querySelector('#num-results');
+    numResults.innerText = totalResults;
+}
+
+
+
+
+// const previousButton = document.getElementById('previous');
+// const nextButton = document.getElementById('next');
+// const currentPage = document.getElementById('current-page');
+// const totalPages = document.getElementById('total-pages');
+
+// let currentPageNumber = 1;
+// previousButton.disabled = currentPageNumber === 1;
+// currentPage.textContent = currentPageNumber;
+
+// nextButton.addEventListener('click', () => {
+//     currentPageNumber++;
+//     pageInterval += 10;
+// })
+
+// previousButton.addEventListener('click', () => {
+//     currentPageNumber--;
+// })
+
+// //  cards[i].classList.add("is-hidden");
+
+// let pageInterval = 10;
+
+// loadPages = () => {
+//     let cards = document.querySelectorAll('details');
+
+//     // for (var i = pageInterval-10; i < pageInterval; i++) {
+//     //     cards[i].classList.add("is-hidden");
+//     // }
+// }
+
+
+
+
+
+
