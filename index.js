@@ -33,12 +33,18 @@ createCard = (data) => {
         schoolName.innerText = element.school_name + ` (${element.dbn})`;
         cardHeader.append(schoolName);
 
-        //create hide/show button in header
+     
+        //add borough
+        // const borough = document.createElement('p');
+        // borough.innerText = element.city;
+        // cardBody.append(borough);
+
 
         //add address to body and link to google Maps
         const addressText = document.createElement('p');
         const addressLink = document.createElement('a');
         const searchQuery = element.school_name.replaceAll(" ", "+");
+        addressText.setAttribute('id','boroughID');
         addressText.innerText = `${element.primary_address_line_1},  ${element.city},  ${element.state_code}, ${element.postcode}`;
         addressLink.href = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
         addressLink.setAttribute('target', '_blank');
@@ -162,6 +168,19 @@ liveSearch = () => {
     }
     numDisplayed.innerText = numDisplayedResults;
 }
+
+//filter by borough
+const borough = document.querySelector('#borough-input');
+borough.addEventListener('change',()=>{
+    let boroughIDs = document.querySelectorAll('#boroughID')
+    boroughIDs.forEach(element => {
+        let text = element.innerHTML;
+        if (!text.includes(borough.value)){
+            element.parentElement.parentElement.parentElement.classList.add('is-hidden')
+        }
+    });
+    
+})
 
 
 //reset button listener
