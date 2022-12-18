@@ -85,3 +85,12 @@ details {
 .is-hidden { 
     display: none; 
 }
+
+.is-hidden-by-search { 
+    display: none; 
+}
+
+.hidden-by-borough {
+    display: none; 
+}
+

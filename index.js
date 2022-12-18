@@ -149,7 +149,6 @@ createCard = (data) => {
 let typingTimer;
 let typeInterval = 300;
 let searchInput = document.getElementById('search');
-
 searchInput.addEventListener('keyup', () => {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(liveSearch, typeInterval);
@@ -160,12 +159,14 @@ liveSearch = () => {
     let cards = document.querySelectorAll('details');
     let search_query = document.getElementById("search").value;
     for (var i = 0; i < cards.length; i++) {
-        if (cards[i].innerText.toLowerCase()
-            .includes(search_query.toLowerCase())) {
-            cards[i].classList.remove("is-hidden");
+        if(!cards[i].classList.contains('is-hidden')){
+            if (cards[i].innerText.toLowerCase()
+                .includes(search_query.toLowerCase())) {
+                cards[i].classList.remove("is-hidden");
 
-        } else {
-            cards[i].classList.add("is-hidden");
+            } else {
+                cards[i].classList.add("is-hidden");
+            }
         }
     }
     updateResultCounter();
@@ -176,7 +177,7 @@ updateResultCounter = () => {
     let cards = document.querySelectorAll('details');
     numDisplayedResults = 0;
     cards.forEach(el => {
-        if (!el.classList.contains('is-hidden')) {
+        if(!el.classList.contains('hidden-by-borough') && !el.classList.contains('is-hidden-by-search') ){
             numDisplayedResults += 1;
         }
     })
@@ -188,11 +189,18 @@ const borough = document.querySelector('#borough-input');
 borough.addEventListener('change', () => {
     let boroughIDs = document.querySelectorAll('#boroughID')
     boroughIDs.forEach(element => {
-        if (element.innerHTML === borough.value || borough.value === 'BOROUGH') {
-            element.parentElement.parentElement.classList.remove('is-hidden');
-        } else {
-            element.parentElement.parentElement.classList.add('is-hidden');
-        }
+
+        // if(!element.parentElement.parentElement.classList.contains('is-hidden')){
+
+        //     if (element.innerHTML != borough.value){
+        //         element.parentElement.parentElement.classList.add('is-hidden');
+        //     } 
+            if (element.innerHTML === borough.value || borough.value === 'BOROUGH') {
+                element.parentElement.parentElement.classList.remove('hidden-by-borough');
+            } else {
+                element.parentElement.parentElement.classList.add('hidden-by-borough');
+            }
+        // }
     });
     updateResultCounter();
 })
