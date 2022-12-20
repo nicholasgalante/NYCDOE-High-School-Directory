@@ -202,7 +202,7 @@ reset.addEventListener('click', () => {
     let cards = document.querySelectorAll('details');
     for (var i = 0; i < cards.length; i++) {
         cards[i].classList.remove("hidden-by-search");
-        cards[i].classList.remove("hidden-by-search");
+        cards[i].classList.remove("hidden-by-borough");
     }
     updateResultCounter();
     let form = document.querySelector('form');

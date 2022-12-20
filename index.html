@@ -1,64 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NYC DOE High School Directory</title>
     <link rel="stylesheet" href="style.css" />
-    
+
 </head>
+
 <body>
     <div id="header">
-        High School Directory<img src="Images/NYCDOE-logo.png" id="logo" alt="NYC DOE Logo">
+       <img src="Images/NYCDOE-logo.png" id="logo" alt="NYC DOE Logo"> 
+       <span id="title">High School Directory</span>
     </div>
 
+    <div id="main">
+        <div id="search-bar">
+            <form>
+                <input type="text" name="search" id="search"
+                    placeholder="Filter by school name, neighborhood, interests, etc.">
+            </form>
 
-    <div id="search-bar">   
-        <form>
-            <input type="text" name="search" id="search" placeholder="Filter by school name, neighborhood, interests, etc.">
-            <!-- <input type="submit" name="submit" value="Search"> -->
-        </form>
-    
-        <select name="borough-input" id="borough-input">
-            <option value="BOROUGH">Borough</option>
-            <option value="BRONX">Bronx</option>
-            <option value="MANHATTAN">Manhattan</option>
-            <option value="QUEENS">Queens</option>
-            <option value="STATEN IS">Staten Island</option>
-        </select>
+            <select name="borough-input" id="borough-input">
+                <option value="BOROUGH">Borough</option>
+                <option value="BRONX">Bronx</option>
+                <option value="MANHATTAN">Manhattan</option>
+                <option value="QUEENS">Queens</option>
+                <option value="STATEN IS">Staten Island</option>
+            </select>
 
-        <select name="borough-input" id="borough-input">
-            <option value="BOROUGH">Borough</option>
-            <option value="BRONX">Bronx</option>
-            <option value="MANHATTAN">Manhattan</option>
-            <option value="QUEENS">Queens</option>
-            <option value="STATEN IS">Staten Island</option>
-        </select>
-        
-        <button id="expand">Expand All</button>
+            <button id="expand">Expand All</button>
 
-        <button id="reset">Reset Filters</button>
-    
-    </div>
+            <button id="reset">Clear Filters</button>
 
+        </div>
 
-    <div id="total-results">
-        Displaying <span id="num-displayed">0</span> of <span id="num-results">0</span> results
-    </div>
-
-    <!-- <div id="pagination">
-        <button id="previous">Previous</button>
-        Page <span id="current-page">0</span> of <span id="total-pages">0</span>
-        <button id="next">Next</button>
-    </div> -->
-
-    <div id="school-list">
+        <div id="school-list">
+            <div id="total-results">
+                Displaying&nbsp<span id="num-displayed">0</span>&nbspof&nbsp<span id="num-results">0</span>&nbspresults
+            </div>
+        </div>
     </div>
 
     <div id="footer">
-        Built by Nicholas Galante
+        Developed by Nicholas Galante. &nbsp Data provided by NYC Open Data. &nbsp Not an official NYC DOE site. 
     </div>
-    <script type="text/javascript" src="index.js" ></script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
+
 </html>
