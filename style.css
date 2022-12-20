@@ -129,6 +129,11 @@ details {
     background-color: #ffff;
 }
 
+#card {
+    padding: 10px;
+}
+
+
 #school-list {
     display: flex;
     flex-direction: column;
@@ -150,7 +155,7 @@ details {
     margin: 10px;
 }
 
-.overview {
+.h3 {
     font-size: 24px;
     font-weight: 400;
     color: #2772db;

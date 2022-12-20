@@ -27,7 +27,7 @@ createCard = (data) => {
 
         //create and append card body div
         const cardBody = document.createElement('div');
-        cardBody.style.display = 'block'; //TODO: change to 'none' to hide
+        cardBody.setAttribute('id','card');
         card.append(cardBody);
 
         //create header text (school title)
@@ -36,11 +36,23 @@ createCard = (data) => {
         schoolName.innerText = element.school_name + ` (${element.dbn})`;
         cardHeader.append(schoolName);
 
-
-        // add borough
+        // add neighborhood and borough
         const borough = document.createElement('p');
         borough.setAttribute('id', 'boroughID');
-        borough.innerText = element.borough;
+        let borocode = element.borocode;
+        switch(borocode){
+            case 'M' : borocode = "Manhattan"
+                break;
+            case "Q" : borocode = "Queens"
+                break; 
+            case "R" : borocode = "Staten Island"
+                break;
+            case "K" : borocode = "Brooklyn"
+                break;
+            case "X" : borocode = "Bronx"
+                break;
+        }
+        borough.innerText = `${element.neighborhood}, ${borocode}`;
         cardBody.append(borough);
 
 
@@ -136,7 +148,7 @@ createCard = (data) => {
         //add overview
         const overviewHeader = document.createElement('h1');
         const overviewText = document.createElement('p');
-        overviewHeader.setAttribute('class', 'overview');
+        overviewHeader.setAttribute('class', 'h3');
         overviewHeader.innerText = 'Overview';
         cardBody.append(overviewHeader);
         overviewText.innerText = element.overview_paragraph;
@@ -181,7 +193,8 @@ const borough = document.querySelector('#borough-input');
 borough.addEventListener('change', () => {
     let boroughIDs = document.querySelectorAll('#boroughID')
     boroughIDs.forEach(element => {
-        if (element.innerHTML === borough.value || borough.value === 'BOROUGH') {
+        console.log(element.innerHTML)
+        if (element.innerHTML.includes(borough.value) || borough.value === 'BOROUGH') {
             element.parentElement.parentElement.classList.remove('hidden-by-borough');
         } else {
             element.parentElement.parentElement.classList.add('hidden-by-borough');
