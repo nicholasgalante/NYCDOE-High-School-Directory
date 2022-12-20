@@ -60,27 +60,35 @@ createCard = (data) => {
         const siteLink = document.createElement('a');
 
         //clean up url link
-        // let site = element.website;
-        // if (!site.includes('http')) {
-        //     site = 'https://' + site;
-        // }
+        let site;
+        if (typeof element.website === "undefined") {
+            site = '';
+        } else {
+            if (!element.website.includes('http')) {
+                site = 'https://' + element.website;
+            } else {
+                site = element.website;
+            }
+        }
 
         // //clean up displayed link
-        // let site2 = element.website;
-        // if (site2.includes('https://')) { site2 = site2.slice(8); }
-        // if (site2.includes('http://')) { site2 = site2.slice(7); }
-        // // if(site2.includes('www.')){site2 = site2.slice(4);}   //exclude www.
-        // if (!site2.includes('www.')) { site2 = 'www.' + site2 }; //include www.
-        // if (site2.charAt(site2.length - 1) === '/') { site2 = site2.substring(0, site2.length - 1); }
-
-        // //set display link for school site
-        // siteText.innerText = site2;
-        // siteLink.append(siteText);
-
+        let site2;
+        if (typeof element.website === "undefined") {
+            site2 = 'UNDEFINED!!!!!!!!!!!!!!!'
+        } else {
+            site2 = element.website;
+            if (site2.includes('https')) { site2 = site2.slice(8); }
+            if (site2.includes('http')) { site2 = site2.slice(7); }
+            if(site2.includes('www.')){site2 = site2.slice(4);} 
+            if (site2.charAt(site2.length - 1) === '/') { site2 = site2.substring(0, site2.length - 1); }
+        }
+        
         // //set url path for school site
-        // // siteLink.href = site;
-        // siteLink.setAttribute('target', '_blank');
-        // cardBody.append(siteLink);
+        siteText.innerText = site2;
+        siteLink.href = site;
+        siteLink.setAttribute('target', '_blank');
+        siteLink.append(siteText);
+        cardBody.append(siteLink);
 
         //add phone number
         const phoneNumber = document.createElement('p');
@@ -159,11 +167,11 @@ liveSearch = () => {
     let cards = document.querySelectorAll('details');
     let search_query = document.getElementById("search").value;
     for (var i = 0; i < cards.length; i++) {
-            if (cards[i].innerText.toLowerCase().includes(search_query.toLowerCase())) {
-                cards[i].classList.remove("hidden-by-search");
-            } else {
-                cards[i].classList.add("hidden-by-search");
-            }
+        if (cards[i].innerText.toLowerCase().includes(search_query.toLowerCase())) {
+            cards[i].classList.remove("hidden-by-search");
+        } else {
+            cards[i].classList.add("hidden-by-search");
+        }
     }
     updateResultCounter();
 }
@@ -186,9 +194,9 @@ borough.addEventListener('change', () => {
 const expand = document.querySelector('#expand');
 expand.addEventListener('click', () => {
     let cards = document.querySelectorAll('details');
-    if(expand.innerHTML === 'Expand All'){
+    if (expand.innerHTML === 'Expand All') {
         expand.innerHTML = 'Collapse All';
-    } else if (expand.innerHTML === 'Collapse All'){
+    } else if (expand.innerHTML === 'Collapse All') {
         expand.innerHTML = 'Expand All';
     }
     cards.forEach(el => {
