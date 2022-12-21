@@ -47,6 +47,8 @@ html {
     color: white;
     border: 1px solid #bebebe;
     padding: 15px;
+    border-radius: 4px;
+    margin-left: 10px;;
 }
 
 #borough-input{
