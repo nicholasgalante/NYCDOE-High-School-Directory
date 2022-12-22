@@ -72,36 +72,33 @@ createCard = (data) => {
         const siteText = document.createElement('p');
         const siteLink = document.createElement('a');
 
-        //clean up url link
-        let site;
-        if (typeof element.website === "undefined") {
-            site = '';
-        } else {
+        //crate school url link
+        if (typeof element.website !== "undefined") {
+
+            //reformat href 
+            let site;
             if (!element.website.includes('http')) {
                 site = 'https://' + element.website;
             } else {
                 site = element.website;
             }
-        }
-
-        // //clean up displayed link
-        let site2;
-        if (typeof element.website === "undefined") {
-            site2 = '';
-        } else {
-            site2 = element.website;
+            
+            //reformate display link
+            let site2 = element.website;
             if (site2.includes('https')) { site2 = site2.slice(8); }
             if (site2.includes('http')) { site2 = site2.slice(7); }
             if(site2.includes('www.')){site2 = site2.slice(4);} 
             if (site2.charAt(site2.length - 1) === '/') { site2 = site2.substring(0, site2.length - 1); }
+
+            //set url path for school site
+            siteText.innerText = site2;
+            siteLink.href = site;
+            siteLink.setAttribute('target', '_blank');
+            siteLink.append(siteText);
+            cardBody.append(siteLink);
         }
         
-        //set url path for school site
-        siteText.innerText = site2;
-        siteLink.href = site;
-        siteLink.setAttribute('target', '_blank');
-        siteLink.append(siteText);
-        cardBody.append(siteLink);
+
 
         //add phone number
         const phoneNumber = document.createElement('p');
