@@ -96,9 +96,6 @@ button:hover {
     border-radius: 4px;
 }
 
-/* form {
-    margin: 0px;
-} */
 
 summary {
     list-style: none;
@@ -179,4 +176,17 @@ details {
 .hidden-by-borough {
     display: none; 
 }
+.info {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
 
+}
+.icon {
+    width: 20px;
+    padding-right: 5px;
+}
+
+p{
+    margin: 0px;
+}

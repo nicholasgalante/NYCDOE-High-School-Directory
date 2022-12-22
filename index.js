@@ -55,18 +55,23 @@ createCard = (data) => {
         borough.innerText = `${element.neighborhood}, ${borocode}`;
         cardBody.append(borough);
 
-
         // //add address to body and link to google Maps
+        const div = document.createElement('div');
+        const addressImg = document.createElement('img');
+        div.setAttribute('class','info')
+        addressImg.setAttribute('class','icon');
+        addressImg.src = "Images/school-icon.png";
+
         const addressText = document.createElement('p');
         const addressLink = document.createElement('a');
         const searchQuery = element.school_name.replaceAll(" ", "+");
-
-        // addressText.setAttribute('id', 'boroughID');
         addressText.innerText = `${element.primary_address_line_1},  ${element.city},  ${element.state_code}, ${element.postcode}`;
         addressLink.href = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
         addressLink.setAttribute('target', '_blank');
-        addressLink.append(addressText)
-        cardBody.append(addressLink);
+        addressLink.append(addressText);
+        div.append(addressImg);
+        div.append(addressLink)
+        cardBody.append(div);
 
         // //add school site to body
         const siteText = document.createElement('p');
@@ -98,8 +103,6 @@ createCard = (data) => {
             cardBody.append(siteLink);
         }
         
-
-
         //add phone number
         const phoneNumber = document.createElement('p');
         const phoneLink = document.createElement('a');
