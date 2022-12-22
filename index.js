@@ -119,18 +119,6 @@ createCard = (data) => {
         emailLink.append(email);
         cardBody.append(emailLink);
 
-        //add subway info
-        const subway = document.createElement('p');
-        if (element.subway) { subway.innerHTML = `<h3>Subway</h3> ${element.subway}` }
-        else { subway.innerHTML = ' ' };
-        cardBody.append(subway);
-
-        //add bus info
-        const bus = document.createElement('p');
-        if (element.bus) { bus.innerHTML = `<h3>Bus</h3> ${element.bus}` }
-        else { bus.innerHTML = ' ' };
-        cardBody.append(bus);
-
         //add gradespan
         const gradespan = document.createElement('p');
         gradespan.innerText = `Grades ${element.gradespan}`;
@@ -145,6 +133,18 @@ createCard = (data) => {
         const schedule = document.createElement('p');
         schedule.innerText = `${element.start_time} - ${element.end_time}`;
         cardBody.append(schedule);
+
+        //add subway info
+        const subway = document.createElement('p');
+        if (element.subway) { subway.innerHTML = `<h3>Subway</h3> ${element.subway}` }
+        else { subway.innerHTML = ' ' };
+        cardBody.append(subway);
+
+        //add bus info
+        const bus = document.createElement('p');
+        if (element.bus) { bus.innerHTML = `<h3>Bus</h3> ${element.bus}` }
+        else { bus.innerHTML = ' ' };
+        cardBody.append(bus);
 
         //add overview header
         const overviewHeader = document.createElement('h1');
@@ -177,6 +177,7 @@ createCard = (data) => {
             const qReport = document.createElement('p');
             const qReportLink = document.createElement('a');
             qReport.innerText = "See the School Quality Report";
+            qReportLink.href = element.sqr_website.url;
             qReportLink.append(qReport);
             performanceDiv.append(qReportLink);
         }
