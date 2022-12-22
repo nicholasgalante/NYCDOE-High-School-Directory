@@ -95,7 +95,7 @@ createCard = (data) => {
             if (site2.charAt(site2.length - 1) === '/') { site2 = site2.substring(0, site2.length - 1); }
         }
         
-        // //set url path for school site
+        //set url path for school site
         siteText.innerText = site2;
         siteLink.href = site;
         siteLink.setAttribute('target', '_blank');
@@ -145,7 +145,7 @@ createCard = (data) => {
         schedule.innerText = `${element.start_time} - ${element.end_time}`;
         cardBody.append(schedule);
 
-        //add overview
+        //add overview header
         const overviewHeader = document.createElement('h1');
         const overviewText = document.createElement('p');
         overviewHeader.setAttribute('class', 'h3');
@@ -162,6 +162,15 @@ createCard = (data) => {
         //set displayed results
         numDisplayedResults++;
         numDisplayed.innerText = numDisplayedResults;
+
+        //add performance div and header
+        const performanceDiv = document.createElement('div');
+        const performanceHeader = document.createElement('h1');
+        performanceHeader.setAttribute('class', 'h3');
+        performanceHeader.innerText = 'Performance';
+        cardBody.append(performanceDiv);
+        performanceDiv.append(performanceHeader);
+        
     });
 }
 
