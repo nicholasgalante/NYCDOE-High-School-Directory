@@ -56,9 +56,9 @@ createCard = (data) => {
         cardBody.append(borough);
 
         // //add address to body and link to google Maps
-        const div = document.createElement('div');
+        const addressDiv = document.createElement('div');
         const addressImg = document.createElement('img');
-        div.setAttribute('class','info')
+        addressDiv.setAttribute('class','info')
         addressImg.setAttribute('class','icon');
         addressImg.src = "Images/school-icon.png";
 
@@ -69,11 +69,11 @@ createCard = (data) => {
         addressLink.href = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
         addressLink.setAttribute('target', '_blank');
         addressLink.append(addressText);
-        div.append(addressImg);
-        div.append(addressLink)
-        cardBody.append(div);
+        addressDiv.append(addressImg);
+        addressDiv.append(addressLink)
+        cardBody.append(addressDiv);
 
-        // //add school site to body
+        //add school site to body
         const siteText = document.createElement('p');
         const siteLink = document.createElement('a');
 
@@ -125,9 +125,18 @@ createCard = (data) => {
         cardBody.append(gradespan);
 
         //add student population
+        const populationDiv = document.createElement('div');
+        const populationImg = document.createElement('img');
+        populationDiv.setAttribute('class','info')
+        populationImg.setAttribute('class','icon');
+        populationImg.src = "Images/population-icon.png";
+
         const studentPopulation = document.createElement('p');
         studentPopulation.innerText = `${element.total_students} students`;
-        cardBody.append(studentPopulation);
+
+        populationDiv.append(populationImg);
+        populationDiv.append(studentPopulation);
+        cardBody.append(populationDiv);
 
         //add schedule
         const schedule = document.createElement('p');
