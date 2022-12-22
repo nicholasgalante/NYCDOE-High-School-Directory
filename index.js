@@ -60,6 +60,7 @@ createCard = (data) => {
         const addressText = document.createElement('p');
         const addressLink = document.createElement('a');
         const searchQuery = element.school_name.replaceAll(" ", "+");
+
         // addressText.setAttribute('id', 'boroughID');
         addressText.innerText = `${element.primary_address_line_1},  ${element.city},  ${element.state_code}, ${element.postcode}`;
         addressLink.href = `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
@@ -86,7 +87,7 @@ createCard = (data) => {
         // //clean up displayed link
         let site2;
         if (typeof element.website === "undefined") {
-            site2 = 'UNDEFINED!!!!!!!!!!!!!!!'
+            site2 = '';
         } else {
             site2 = element.website;
             if (site2.includes('https')) { site2 = site2.slice(8); }
@@ -170,7 +171,16 @@ createCard = (data) => {
         performanceHeader.innerText = 'Performance';
         cardBody.append(performanceDiv);
         performanceDiv.append(performanceHeader);
-        
+
+        //add link for school quality report
+        if(typeof element.sqr_website !== "undefined"){
+            const qReport = document.createElement('p');
+            const qReportLink = document.createElement('a');
+            qReport.innerText = "See the School Quality Report";
+            qReportLink.append(qReport);
+            performanceDiv.append(qReportLink);
+        }
+  
     });
 }
 
