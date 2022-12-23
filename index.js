@@ -27,7 +27,7 @@ createCard = (data) => {
 
         //create and append card body div
         const cardBody = document.createElement('div');
-        cardBody.setAttribute('id','card');
+        cardBody.setAttribute('id', 'card');
         card.append(cardBody);
 
         //create header text (school title)
@@ -41,19 +41,19 @@ createCard = (data) => {
         const locationImg = document.createElement('img');
         locationImg.src = 'Images/location-icon.png';
         const neighborhood = document.createElement('p');
-        neighborhoodDiv.setAttribute('class','info');
-        locationImg.setAttribute('class','icon');
+        neighborhoodDiv.setAttribute('class', 'info');
+        locationImg.setAttribute('class', 'icon');
         let borocode = element.borocode;
-        switch(borocode){
-            case 'M' : borocode = "Manhattan"
+        switch (borocode) {
+            case 'M': borocode = "Manhattan"
                 break;
-            case "Q" : borocode = "Queens"
-                break; 
-            case "R" : borocode = "Staten Island"
+            case "Q": borocode = "Queens"
                 break;
-            case "K" : borocode = "Brooklyn"
+            case "R": borocode = "Staten Island"
                 break;
-            case "X" : borocode = "Bronx"
+            case "K": borocode = "Brooklyn"
+                break;
+            case "X": borocode = "Bronx"
                 break;
         }
         neighborhood.innerText = `${element.neighborhood}, ${borocode}`;
@@ -64,8 +64,8 @@ createCard = (data) => {
         // //add address to body and link to google Maps
         const addressDiv = document.createElement('div');
         const addressImg = document.createElement('img');
-        addressDiv.setAttribute('class','info')
-        addressImg.setAttribute('class','icon');
+        addressDiv.setAttribute('class', 'info')
+        addressImg.setAttribute('class', 'icon');
         addressImg.src = "Images/school-icon.png";
         const addressText = document.createElement('p');
         const addressLink = document.createElement('a');
@@ -79,6 +79,10 @@ createCard = (data) => {
         cardBody.append(addressDiv);
 
         //add school site to body
+        const siteDiv = document.createElement('div');
+        siteDiv.setAttribute('class', 'info');
+        const siteImg = document.createElement('img');
+        siteImg.setAttribute('class', 'icon');
         const siteText = document.createElement('p');
         const siteLink = document.createElement('a');
 
@@ -92,29 +96,39 @@ createCard = (data) => {
             } else {
                 site = element.website;
             }
-            
+
             //reformate display link
             let site2 = element.website;
             if (site2.includes('https')) { site2 = site2.slice(8); }
             if (site2.includes('http')) { site2 = site2.slice(7); }
-            if(site2.includes('www.')){site2 = site2.slice(4);} 
+            if (site2.includes('www.')) { site2 = site2.slice(4); }
             if (site2.charAt(site2.length - 1) === '/') { site2 = site2.substring(0, site2.length - 1); }
 
             //set url path for school site
+            siteImg.src = 'Images/pointer-icon.png';
             siteText.innerText = site2;
             siteLink.href = site;
             siteLink.setAttribute('target', '_blank');
             siteLink.append(siteText);
-            cardBody.append(siteLink);
+            siteDiv.append(siteImg);
+            siteDiv.append(siteLink);
+            cardBody.append(siteDiv);
         }
-        
+
         //add phone number
+        const phoneDiv = document.createElement('div');
+        const phoneImg = document.createElement('img');
         const phoneNumber = document.createElement('p');
         const phoneLink = document.createElement('a');
+        phoneDiv.setAttribute('class', 'info');
+        phoneImg.setAttribute('class', 'icon');
+        phoneImg.src = 'Images/phone-icon.png';
         phoneLink.href = `tel:${phoneNumber}`;
         phoneNumber.innerText = element.phone_number;
         phoneLink.append(phoneNumber)
-        cardBody.append(phoneLink);
+        phoneDiv.append(phoneImg);
+        phoneDiv.append(phoneLink);
+        cardBody.append(phoneDiv);
 
         //add school email
         const emailDiv = document.createElement('div');
@@ -122,8 +136,8 @@ createCard = (data) => {
         const email = document.createElement('p');
         const emailLink = document.createElement('a');
         emailImg.src = 'Images/email-icon.png';
-        emailDiv.setAttribute('class','info')
-        emailImg.setAttribute('class','icon');
+        emailDiv.setAttribute('class', 'info')
+        emailImg.setAttribute('class', 'icon');
         emailLink.href = `mailto:${element.school_email}`;
         email.innerText = element.school_email;
         emailLink.append(email);
@@ -132,15 +146,23 @@ createCard = (data) => {
         cardBody.append(emailDiv);
 
         //add gradespan
+        const gradespanDiv = document.createElement('div');
+        const gradespanImg = document.createElement('img');
+
         const gradespan = document.createElement('p');
+        gradespanDiv.setAttribute('class', 'info');
+        gradespanImg.setAttribute('class', 'icon');
+        gradespanImg.src = 'Images/graduation-icon.png';
         gradespan.innerText = `Grades ${element.gradespan}`;
-        cardBody.append(gradespan);
+        gradespanDiv.append(gradespanImg);
+        gradespanDiv.append(gradespan);
+        cardBody.append(gradespanDiv);
 
         //add student population
         const populationDiv = document.createElement('div');
         const populationImg = document.createElement('img');
-        populationDiv.setAttribute('class','info')
-        populationImg.setAttribute('class','icon');
+        populationDiv.setAttribute('class', 'info')
+        populationImg.setAttribute('class', 'icon');
         populationImg.src = "Images/population-icon.png";
         const studentPopulation = document.createElement('p');
         studentPopulation.innerText = `${element.total_students} students`;
@@ -149,15 +171,29 @@ createCard = (data) => {
         cardBody.append(populationDiv);
 
         //add schedule
+        const scheduleDiv = document.createElement('div');
+        const scheduleImg = document.createElement('img');
         const schedule = document.createElement('p');
+        scheduleDiv.setAttribute('class', 'info');
+        scheduleImg.setAttribute('class', 'icon');
+        scheduleImg.src = 'Images/clock-icon.png';
         schedule.innerText = `${element.start_time} - ${element.end_time}`;
-        cardBody.append(schedule);
+        scheduleDiv.append(scheduleImg);
+        scheduleDiv.append(schedule);
+        cardBody.append(scheduleDiv);
 
         //add subway info
+        const subwayDiv = document.createElement('div');
+        const subwayImg = document.createElement('img');
         const subway = document.createElement('p');
+        subwayDiv.setAttribute('class', 'info');
+        subwayImg.setAttribute('class', 'icon');
+        subwayImg.src = 'Images/subway-icon.png';
         if (element.subway) { subway.innerHTML = `<h3>Subway</h3> ${element.subway}` }
         else { subway.innerHTML = ' ' };
-        cardBody.append(subway);
+        subwayDiv.append(subwayImg);
+        subwayDiv.append(subway);
+        cardBody.append(subwayDiv);
 
         //add bus info
         const bus = document.createElement('p');
@@ -192,7 +228,7 @@ createCard = (data) => {
         performanceDiv.append(performanceHeader);
 
         //add link for school quality report
-        if(typeof element.sqr_website !== "undefined"){
+        if (typeof element.sqr_website !== "undefined") {
             const qReport = document.createElement('p');
             const qReportLink = document.createElement('a');
             qReport.innerText = "See the School Quality Report";
@@ -200,7 +236,7 @@ createCard = (data) => {
             qReportLink.append(qReport);
             performanceDiv.append(qReportLink);
         }
-  
+
     });
 }
 
