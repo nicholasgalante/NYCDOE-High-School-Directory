@@ -112,6 +112,7 @@ createCard = (data) => {
         cardBody.append(phoneLink);
 
         //add school email
+        const emailDiv = document.createElement('div');
         const email = document.createElement('p');
         const emailLink = document.createElement('a');
         emailLink.href = `mailto:${element.school_email}`;
@@ -130,10 +131,8 @@ createCard = (data) => {
         populationDiv.setAttribute('class','info')
         populationImg.setAttribute('class','icon');
         populationImg.src = "Images/population-icon.png";
-
         const studentPopulation = document.createElement('p');
         studentPopulation.innerText = `${element.total_students} students`;
-
         populationDiv.append(populationImg);
         populationDiv.append(studentPopulation);
         cardBody.append(populationDiv);
