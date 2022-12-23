@@ -24,6 +24,7 @@ body{
 }
 
 #header {
+    padding-top: 5px;
     background-color: #2772db;
     display:flex;
 }

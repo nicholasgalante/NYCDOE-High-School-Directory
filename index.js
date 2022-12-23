@@ -37,8 +37,12 @@ createCard = (data) => {
         cardHeader.append(schoolName);
 
         // add neighborhood and borough
-        const borough = document.createElement('p');
-        borough.setAttribute('id', 'boroughID');
+        const neighborhoodDiv = document.createElement('div');
+        const locationImg = document.createElement('img');
+        locationImg.src = 'Images/location-icon.png';
+        const neighborhood = document.createElement('p');
+        neighborhoodDiv.setAttribute('class','info');
+        locationImg.setAttribute('class','icon');
         let borocode = element.borocode;
         switch(borocode){
             case 'M' : borocode = "Manhattan"
@@ -52,8 +56,10 @@ createCard = (data) => {
             case "X" : borocode = "Bronx"
                 break;
         }
-        borough.innerText = `${element.neighborhood}, ${borocode}`;
-        cardBody.append(borough);
+        neighborhood.innerText = `${element.neighborhood}, ${borocode}`;
+        neighborhoodDiv.append(locationImg);
+        neighborhoodDiv.append(neighborhood);
+        cardBody.append(neighborhoodDiv);
 
         // //add address to body and link to google Maps
         const addressDiv = document.createElement('div');
@@ -61,7 +67,6 @@ createCard = (data) => {
         addressDiv.setAttribute('class','info')
         addressImg.setAttribute('class','icon');
         addressImg.src = "Images/school-icon.png";
-
         const addressText = document.createElement('p');
         const addressLink = document.createElement('a');
         const searchQuery = element.school_name.replaceAll(" ", "+");
@@ -113,12 +118,18 @@ createCard = (data) => {
 
         //add school email
         const emailDiv = document.createElement('div');
+        const emailImg = document.createElement('img');
         const email = document.createElement('p');
         const emailLink = document.createElement('a');
+        emailImg.src = 'Images/email-icon.png';
+        emailDiv.setAttribute('class','info')
+        emailImg.setAttribute('class','icon');
         emailLink.href = `mailto:${element.school_email}`;
         email.innerText = element.school_email;
         emailLink.append(email);
-        cardBody.append(emailLink);
+        emailDiv.append(emailImg);
+        emailDiv.append(emailLink);
+        cardBody.append(emailDiv);
 
         //add gradespan
         const gradespan = document.createElement('p');
