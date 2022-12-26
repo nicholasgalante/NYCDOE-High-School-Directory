@@ -56,6 +56,7 @@ createCard = (data) => {
             case "X": borocode = "Bronx"
                 break;
         }
+        neighborhood.setAttribute('id','boroughID');
         neighborhood.innerText = `${element.neighborhood}, ${borocode}`;
         neighborhoodDiv.append(locationImg);
         neighborhoodDiv.append(neighborhood);
@@ -196,10 +197,17 @@ createCard = (data) => {
         cardBody.append(subwayDiv);
 
         //add bus info
+        const busDiv = document.createElement('div');
+        const busImg = document.createElement('img');
+        busDiv.setAttribute('class', 'info');
+        busImg.setAttribute('class', 'icon');
+        busImg.src = 'Images/bus-icon.png';
         const bus = document.createElement('p');
         if (element.bus) { bus.innerHTML = `<h3>Bus</h3> ${element.bus}` }
         else { bus.innerHTML = ' ' };
-        cardBody.append(bus);
+        busDiv.append(busImg);
+        busDiv.append(bus);
+        cardBody.append(busDiv);
 
         //add overview header
         const overviewHeader = document.createElement('h1');
@@ -229,12 +237,20 @@ createCard = (data) => {
 
         //add link for school quality report
         if (typeof element.sqr_website !== "undefined") {
+            const qReportDiv = document.createElement('div');
+            const qReportImg = document.createElement('img');
             const qReport = document.createElement('p');
             const qReportLink = document.createElement('a');
+            qReportDiv.setAttribute('class','info');
+            qReportImg.setAttribute('class','icon');
+            qReportImg.src = 'Images/report-icon.png';
             qReport.innerText = "See the School Quality Report";
             qReportLink.href = element.sqr_website.url;
+
             qReportLink.append(qReport);
-            performanceDiv.append(qReportLink);
+            qReportDiv.append(qReportImg);
+            qReportDiv.append(qReportLink);
+            performanceDiv.append(qReportDiv);
         }
 
     });
@@ -268,11 +284,10 @@ const borough = document.querySelector('#borough-input');
 borough.addEventListener('change', () => {
     let boroughIDs = document.querySelectorAll('#boroughID')
     boroughIDs.forEach(element => {
-        console.log(element.innerHTML)
         if (element.innerHTML.includes(borough.value) || borough.value === 'BOROUGH') {
-            element.parentElement.parentElement.classList.remove('hidden-by-borough');
+            element.parentElement.parentElement.parentElement.classList.remove('hidden-by-borough');
         } else {
-            element.parentElement.parentElement.classList.add('hidden-by-borough');
+            element.parentElement.parentElement.parentElement.classList.add('hidden-by-borough');
         }
     });
     updateResultCounter();

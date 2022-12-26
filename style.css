@@ -163,6 +163,8 @@ details {
 
 
 #footer {
+    display: flex;
+    justify-content: space-around;
     background-color: #2772db;
     color: white;
     padding: 15px;
@@ -186,6 +188,7 @@ details {
 .icon {
     width: 20px;
     padding-right: 5px;
+    margin: 7px;
 }
 
 p{
