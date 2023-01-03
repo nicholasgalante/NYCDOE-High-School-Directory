@@ -1,6 +1,5 @@
-html, body { height: 100%; }
-
 body{
+    font-size: 16px;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -29,11 +28,6 @@ body{
     display:flex;
 }
 
-html {
-    font-size: 16px;
-}
-
-
 #search-bar{
     display:flex;
     justify-content: center;
@@ -59,7 +53,6 @@ html {
 }
 
 #reset {
- 
     height: 50px;
     font-size: 1rem;
     background-color: #2772db;
@@ -68,15 +61,6 @@ html {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     padding: 15px;
-
-}
-
-button:hover {
-    background-color:rgba(0, 0, 0, 0.1);
-}
-
-#reset:hover:after {
-    background: rgba(0, 0, 0, 0.2);
 }
 
 #search{
@@ -95,7 +79,6 @@ button:hover {
     margin: 10px;
     border-radius: 4px;
 }
-
 
 summary {
     list-style: none;
@@ -132,7 +115,6 @@ details {
     padding: 10px;
 }
 
-
 #school-list {
     display: flex;
     flex-direction: column;
@@ -145,8 +127,6 @@ details {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* flex-basis: 20%; */
-    /* flex: 1 0 auto; */
 }
 
 .school-name {
